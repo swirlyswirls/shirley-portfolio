@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "WorkSans-Regular";
+  src: url("../fonts/worksans/WorkSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "WorkSans-Medium";
+  src: url("../fonts/worksans/WorkSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "WorkSans-SemiBold";
+  src: url("../fonts/worksans/WorkSans-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fonts/montserrat/Montserrat-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Montserrat-Bold";
+  src: url("../fonts/montserrat/Montserrat-Bold.ttf");
+}

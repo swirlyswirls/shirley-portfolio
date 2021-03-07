@@ -1,7 +1,8 @@
 import React from 'react'
-import './base.css'
+import '../styles/layout.css'
 import Container from './container'
 import Navigation from './navigation'
+
 
 class Template extends React.Component {
   render() {
@@ -9,6 +10,7 @@ class Template extends React.Component {
 
     return (
       <Container>
+        {/* <GlobalStyles /> */}
         <Navigation />
         {children}
       </Container>
