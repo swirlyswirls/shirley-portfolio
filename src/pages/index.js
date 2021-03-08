@@ -21,16 +21,13 @@ const StyledWrapper = styled.main`
   width: calc(100% - 60px);
 
   @media only screen and ${breakpoint.device.md} {
-    // flex-direction: column;
     justify-content: center;
-    /* margin-top: 257px; */
   }
 `
 
 const LeftContent = styled.section`
   display: flex;
   align-items: center;
-  /* width: 498px; */
   width: calc(50% - 25px);
   padding-left: 100px;
 
@@ -70,7 +67,7 @@ const StyledMiddleText = styled.div`
 `
 
 const StyledBottomText = styled.div`
-  font-family: WorkSans-Regular;
+  font-family: WorkSans;
   font-size: 18px;
   line-height: 1.56;
   color: #8e7f79;
