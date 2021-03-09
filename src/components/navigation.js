@@ -5,7 +5,7 @@ import styled from "styled-components"
 import Img from "gatsby-image"
 
 const StyledNav = styled.nav`
-  margin: 16px 40px;
+  padding: 16px 40px;
 `
 
 const StyledUl = styled.ul`

@@ -1,40 +1,101 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import get from 'lodash/get'
 import Layout from '../components/layout'
 import Img from 'gatsby-image'
 import { graphql } from 'gatsby'
+import styled from 'styled-components'
+
+const StyledWrapper = styled.main`
+  max-width: 1242px;
+  width: calc(100% - 60px);
+  margin: auto;
+`
+
+const StyledWrapperInner = styled.article`
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+`
+
+const LeftContent = styled.div`
+  width: 449px;
+  /* display: flex; */
+`
+
+const RightContent = styled.div`
+  width: 641px;
+`
 
 function Work({ data }) {
+  const [projectImages, setProjectImages] = useState([])
+
+  const [projectId, setProjectId] = useState(0)
+
+  const [currentImage, setCurrentImage] = useState(
+    data.allContentfulWorkProjectPreview.edges[0].node.projectImage.fluid
+  )
+
+  useEffect(() => {
+    const allImages = data.allContentfulWorkProjectPreview.edges.map(
+      (project) => {
+        return {
+          id: project.node.id,
+          image: project.node.projectImage.fluid,
+        }
+      }
+    )
+
+    setProjectImages(allImages)
+  }, [data.allContentfulWorkProjectPreview.edges])
+
   const headerText = data.allContentfulWorkPage.edges[0].node.headerText
 
-  const workPreviewProjects = data.allContentfulWorkProjectPreview.edges.map(
-    project => {
-      // console.log(project.node.projectImage.fluid)
+  const siteTitle = get(this, 'props.data.site.siteMetadata.title')
 
+  const clickedPreviewImage = (productId) => {
+    setProjectId(productId)
+    for (let i = 0; i < projectImages.length; i++) {
+      if (projectId === projectImages[i].id) {
+        setCurrentImage(projectImages[i].image)
+      }
+    }
+  }
 
+  const leftContentPreview = data.allContentfulWorkProjectPreview.edges.map(
+    (project) => {
       return (
-        <div key={project.node.id}>
-          <p>{project.node.projectTitle}</p>
+        <div
+          key={project.node.id}
+          onClick={() => clickedPreviewImage(project.node.id)}
+        >
+          <div>{project.node.projectTitle}</div>
           <p>{project.node.projectBody}</p>
-
-          <div style={{ width: '600px' }}>
-            <Img fluid={project.node.projectImage.fluid} />
-          </div>
         </div>
       )
     }
   )
 
-  const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-
+  console.log(projectId)
 
   return (
     <>
       <Layout>
-      <Helmet title={siteTitle} />
-        <h1>{headerText}</h1>
-        {workPreviewProjects}
+        <Helmet title={siteTitle} />
+        {/* {workPreviewProjects} */}
+
+        <StyledWrapper>
+          <h1>{headerText}</h1>
+          <StyledWrapperInner>
+            <LeftContent>{leftContentPreview}</LeftContent>
+
+            <RightContent>
+              <div style={{ width: '600px' }}>
+                <Img fluid={currentImage} />
+              </div>
+            </RightContent>
+          </StyledWrapperInner>
+        </StyledWrapper>
       </Layout>
     </>
   )
@@ -51,7 +112,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulWorkProjectPreview(sort: {order: DESC, fields: id}) {
+    allContentfulWorkProjectPreview(sort: { order: DESC, fields: id }) {
       edges {
         node {
           id

@@ -1,17 +1,33 @@
-import React from "react"
-import { Link } from "gatsby"
-import breakpoint from "../styles/breakpoints"
+import React from 'react'
+import { Link } from 'gatsby'
+import breakpoint from '../styles/breakpoints'
 
-import { graphql } from "gatsby"
+import { graphql } from 'gatsby'
 // import { v4 as uuidv4 } from "uuid"
-import Img from "gatsby-image"
+import Img from 'gatsby-image'
 
-import styled from "styled-components"
+import styled from 'styled-components'
 // import get from 'lodash/get'
 // import { Helmet } from 'react-helmet'
 // import Hero from '../components/hero'
-import Layout from "../components/layout"
+import Layout from '../components/layout'
 // import ArticlePreview from '../components/article-preview'
+// import Navigation from '../components/navigation'
+// import HomeDesktopBg from '../images/wallpaper-home-desktop.svg'
+// import HomeTabletBg from '../images/wallpaper-home-tablet.svg'
+
+
+// const StyledHomeBackground = styled.div`
+//   background: url(${HomeDesktopBg});
+//   /* background-position: center; */
+//   /* background-repeat: no-repeat; */
+//   background-size: cover;
+
+//   @media only screen and ${breakpoint.device.md} {
+//     background: url(${HomeTabletBg});
+//     /* background-size: 100% 100%; */
+//   }
+// `
 
 const StyledWrapper = styled.main`
   display: flex;
@@ -25,25 +41,30 @@ const StyledWrapper = styled.main`
   }
 `
 
+// Method #1 - Add fixed width
+// Method #2 - Add calculated width
 const LeftContent = styled.section`
   display: flex;
   align-items: center;
+  /* width: 498px; */
   width: calc(50% - 25px);
   padding-left: 100px;
+  /* margin-right: 100px; */
 
   @media only screen and ${breakpoint.device.md} {
     height: 90vh;
     width: 540px;
     padding: 0;
+    /* padding-right: 50px; */
   }
 `
 
 const BodyText = styled.article``
 
 const RightContent = styled.section`
-  width: 641px;
   border-radius: 10px;
   border: solid 2px #33241e;
+  /* width: 641px; */
   width: calc(50% - 25px);
 
   @media only screen and ${breakpoint.device.md} {
@@ -82,6 +103,8 @@ const RecentWorkText = styled.div`
   }
 `
 
+
+
 function RootIndex({ data }) {
   // const siteTitle = get(this, 'props.data.site.siteMetadata.title')
   // const posts = get(this, 'props.data.allContentfulBlogPost.edges')
@@ -103,10 +126,12 @@ function RootIndex({ data }) {
   return (
     // <Layout location={this.props.location}>
     <Layout>
-      <StyledWrapper>
-        {/* <Helmet title={siteTitle} /> */}
-        {/* <Hero data={author.node} /> */}
-        {/* <div className='wrapper'>
+      {/* <StyledHomeBackground> */}
+        {/* <Navigation /> */}
+        <StyledWrapper>
+          {/* <Helmet title={siteTitle} /> */}
+          {/* <Hero data={author.node} /> */}
+          {/* <div className='wrapper'>
           <h2 className='section-headline'>Home - Recent articles</h2>
             <ul className='article-list'>
               {posts.map(({ node }) => {
@@ -118,23 +143,24 @@ function RootIndex({ data }) {
               })}
             </ul> */}
 
-        <LeftContent>
-          <BodyText>
-            <StyledTopText>{topText}</StyledTopText>
+          <LeftContent>
+            <BodyText>
+              <StyledTopText>{topText}</StyledTopText>
 
-            <StyledMiddleText>{middleText}</StyledMiddleText>
+              <StyledMiddleText>{middleText}</StyledMiddleText>
 
-            <StyledBottomText>{bottomText}</StyledBottomText>
-            <RecentWorkText>
-              <Link to="/work">{recentWorkLinkText}</Link>
-            </RecentWorkText>
-          </BodyText>
-        </LeftContent>
+              <StyledBottomText>{bottomText}</StyledBottomText>
+              <RecentWorkText>
+                <Link to="/work">{recentWorkLinkText}</Link>
+              </RecentWorkText>
+            </BodyText>
+          </LeftContent>
 
-        <RightContent>
-          <Img fluid={image} />
-        </RightContent>
-      </StyledWrapper>
+          <RightContent>
+            <Img fluid={image} />
+          </RightContent>
+        </StyledWrapper>
+      {/* </StyledHomeBackground> */}
     </Layout>
   )
 }
