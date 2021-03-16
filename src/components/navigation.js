@@ -27,7 +27,7 @@ const StyledUl = styled.ul`
   }
 
   a:hover {
-    border-bottom: 3px solid var(--color-link);
+    border-bottom: 3px solid var(--color-blue);
     padding-bottom: 8px;
     /* position: relative; */
   }
