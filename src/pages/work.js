@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import breakpoint from '../styles/breakpoints'
 
-const StyledWrapper = styled.main`
+const Wrapper = styled.main`
   max-width: 1242px;
   width: calc(100% - 60px);
   margin: auto;
@@ -18,7 +18,7 @@ const StyledWrapper = styled.main`
   }
 `
 
-const StyledWrapperInner = styled.article`
+const WrapperInner = styled.article`
   display: flex;
   justify-content: space-between;
   margin-top: 35px;
@@ -28,46 +28,46 @@ const StyledWrapperInner = styled.article`
   }
 `
 
-const StyledProjectSection = styled.section``
+const ProjectSection = styled.section``
 
-const StyledTitleContainer = styled.span`
+const TitleContainer = styled.span`
   font-family: WorkSans-SemiBold;
   font-size: 30px;
   margin-top: 19.5px;
   margin-bottom: 20px;
   display: flex;
 `
-const StyledProjectNumber = styled.span`
+const ProjectNumber = styled.span`
   margin-right: 20px;
   text-decoration: none;
   color: ${(prop) =>
     prop.hover ? 'var(--color-black)' : 'var(--color-light-gray)'};
 `
 
-const StyledTitle = styled.div`
+const Title = styled.div`
   color: ${(prop) =>
     prop.hover ? 'var(--color-blue)' : 'var(--color-light-gray)'};
   text-decoration: ${(prop) => (prop.hover ? 'underline' : 'none')};
   margin-right: 10px;
 `
 
-const StyledArrow = styled.div`
+const Arrow = styled.div`
   color: ${(prop) =>
     prop.hover ? 'var(--color-blue)' : 'var(--color-light-gray)'};
 `
 
-const StyledBodyInner = styled.div`
+const BodyInner = styled.div`
   margin-left: 50px;
 `
 
-const StyledHeading = styled.div`
+const Heading = styled.div`
   font-family: Montserrat-Bold;
   font-size: 36px;
   color: var(--color-black);
   margin-bottom: 50px;
 `
 
-const StyledBodyText = styled.div`
+const BodyText = styled.div`
   font-family: WorkSans;
   font-size: 16px;
   line-height: 1.75;
@@ -76,7 +76,7 @@ const StyledBodyText = styled.div`
     prop.hover ? 'var(--color-black)' : 'var(--color-light-gray)'};
 `
 
-const StyledTagList = styled.ul`
+const TagList = styled.ul`
   padding: 0 10px;
   margin-left: 0;
   margin-bottom: 18px;
@@ -84,7 +84,7 @@ const StyledTagList = styled.ul`
   background-color: ${(prop) => (prop.hover ? '#f9f5f3' : null)};
 `
 
-const StyledTagItem = styled.li`
+const TagItem = styled.li`
   font-family: WorkSans;
   font-size: 16px;
   line-height: 1.75;
@@ -93,7 +93,7 @@ const StyledTagItem = styled.li`
   display: inline;
 `
 
-const StyledDivider = styled.div`
+const Divider = styled.div`
   width: 100%;
   height: 1px;
   border: solid 1px #ece3e0;
@@ -164,15 +164,15 @@ function Work({ data }) {
       const tagsItems = project.node.tags.map((tag, index) => {
         if (projectId === project.node.id) {
           return (
-            <StyledTagItem key={index} hover>
+            <TagItem key={index} hover>
               {(index ? ', ' : '') + tag}
-            </StyledTagItem>
+            </TagItem>
           )
         } else {
           return (
-            <StyledTagItem key={index}>
+            <TagItem key={index}>
               {(index ? ', ' : '') + tag}
-            </StyledTagItem>
+            </TagItem>
           )
         }
       })
@@ -180,45 +180,45 @@ function Work({ data }) {
       return (
         <>
           <Link to="/">
-            <StyledProjectSection
+            <ProjectSection
               key={project.node.id}
               onMouseEnter={() => hoverPreviewImage(project.node.id)}
             >
               {projectId === project.node.id ? (
                 <>
-                  <StyledTitleContainer>
-                    <StyledProjectNumber hover>
+                  <TitleContainer>
+                    <ProjectNumber hover>
                       0{index + 1}
-                    </StyledProjectNumber>
-                    <StyledTitle hover>{project.node.projectTitle}</StyledTitle>
-                    <StyledArrow hover>→</StyledArrow>
-                  </StyledTitleContainer>
+                    </ProjectNumber>
+                    <Title hover>{project.node.projectTitle}</Title>
+                    <Arrow hover>→</Arrow>
+                  </TitleContainer>
 
-                  <StyledBodyInner>
-                    <StyledBodyText hover>
+                  <BodyInner>
+                    <BodyText hover>
                       {project.node.projectBody}
-                    </StyledBodyText>
-                    <StyledTagList hover>{tagsItems}</StyledTagList>
-                  </StyledBodyInner>
+                    </BodyText>
+                    <TagList hover>{tagsItems}</TagList>
+                  </BodyInner>
                 </>
               ) : (
                 <>
-                  <StyledTitleContainer>
-                    <StyledProjectNumber>0{index + 1}</StyledProjectNumber>
-                    <StyledTitle>{project.node.projectTitle}</StyledTitle>
-                    <StyledArrow> →</StyledArrow>
-                  </StyledTitleContainer>
+                  <TitleContainer>
+                    <ProjectNumber>0{index + 1}</ProjectNumber>
+                    <Title>{project.node.projectTitle}</Title>
+                    <Arrow> →</Arrow>
+                  </TitleContainer>
 
-                  <StyledBodyInner>
-                    <StyledBodyText>{project.node.projectBody}</StyledBodyText>
-                    <StyledTagList>{tagsItems}</StyledTagList>
-                  </StyledBodyInner>
+                  <BodyInner>
+                    <BodyText>{project.node.projectBody}</BodyText>
+                    <TagList>{tagsItems}</TagList>
+                  </BodyInner>
                 </>
               )}
 
               {/* Check the array to see if its the last item to not add divider */}
-              {index + 1 !== arrayLength && <StyledDivider />}
-            </StyledProjectSection>
+              {index + 1 !== arrayLength && <Divider />}
+            </ProjectSection>
           </Link>
         </>
       )
@@ -230,10 +230,10 @@ function Work({ data }) {
       <Layout>
         <Helmet title={siteTitle} />
 
-        <StyledWrapper>
-          <StyledWrapperInner>
+        <Wrapper>
+          <WrapperInner>
             <LeftContent>
-              <StyledHeading>{headerText}</StyledHeading>
+              <Heading>{headerText}</Heading>
               {leftContentPreview}
             </LeftContent>
 
@@ -242,8 +242,8 @@ function Work({ data }) {
                 <Img fluid={currentImageDesktop} />
               </div>
             </RightContent>
-          </StyledWrapperInner>
-        </StyledWrapper>
+          </WrapperInner>
+        </Wrapper>
       </Layout>
     </>
   )
