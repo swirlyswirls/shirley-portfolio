@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useCallback, useRef } from 'react'
-import styled from 'styled-components'
+import React, { useState, useEffect, useCallback, useRef } from "react"
+import styled from "styled-components"
 // import Carousel from './Carousel'
 
 const H1 = styled.h1`
@@ -36,8 +36,8 @@ const Item = styled.div`
   font-size: 2rem;
   text-transform: capitalize;
 
-  width: ${({size}) => `${size}rem`};
-  height: ${({size}) => `${size}rem`};
+  width: ${({ size }) => `${size}rem`};
+  height: ${({ size }) => `${size}rem`};
 
   display: flex;
 
@@ -47,7 +47,7 @@ const Item = styled.div`
 
 function getPrevElement(list) {
   const sibling = list[0].previousElementSibling
-  
+
   if (sibling instanceof HTMLElement) {
     return sibling
   }
@@ -74,10 +74,9 @@ function usePosition(ref) {
 
     const update = () => {
       const rect = element.getBoundingClientRect()
-     
+
       const visibleElements = Array.from(element.children).filter((child) => {
         const childRect = child.getBoundingClientRect()
-        
 
         return childRect.left >= rect.left && childRect.right <= rect.right
       })
@@ -90,10 +89,10 @@ function usePosition(ref) {
 
     update()
 
-    element.addEventListener('scroll', update, {passive: true})
+    element.addEventListener("scroll", update, { passive: true })
 
     return () => {
-      element.removeEventListener('scroll', update, {passive: true})
+      element.removeEventListener("scroll", update, { passive: true })
     }
   }, [ref])
 
@@ -112,10 +111,10 @@ function usePosition(ref) {
 
       currentNode.scroll({
         left: newScrollPosition,
-        behavior: 'smooth',
+        behavior: "smooth",
       })
     },
-    [ref],
+    [ref]
   )
 
   const scrollRight = useCallback(() => scrollToElement(nextElement), [
@@ -140,18 +139,18 @@ const CarouserContainer = styled(Relative)`
   overflow: hidden;
 `
 
- const CarouselItem = styled.div`
+const CarouselItem = styled.div`
   flex: 0 0 auto;
 
   margin-left: 1rem;
 `
 
- const CarouselButton = styled.button`
+const CarouselButton = styled.button`
   position: absolute;
 
   cursor: pointer;
 
-  top: 50%;
+  /* top: 50%; */
   z-index: 1;
 
   transition: transform 0.1s ease-in-out;
@@ -161,20 +160,24 @@ const CarouserContainer = styled(Relative)`
   border: none;
   padding: 0.5rem;
 `
- const LeftCarouselButton = styled(CarouselButton)`
+
+const ButtonContainer = styled.div`
+  padding-bottom: 50px;
+`
+
+const LeftCarouselButton = styled(CarouselButton)`
   left: 0;
   /* transform: translate(-100%, -50%); */
   transform: translate(0%, -50%);
-
 
   /* ${CarouserContainer}:hover & {
     transform: translate(0%, -50%);
   } */
 
-  visibility: ${({hasItemsOnLeft}) => (hasItemsOnLeft ? `all` : `hidden`)};
+  visibility: ${({ hasItemsOnLeft }) => (hasItemsOnLeft ? `all` : `hidden`)};
 `
 
- const RightCarouselButton = styled(CarouselButton)`
+const RightCarouselButton = styled(CarouselButton)`
   right: 0;
   /* transform: translate(100%, -50%); */
   transform: translate(0%, -50%);
@@ -183,10 +186,10 @@ const CarouserContainer = styled(Relative)`
     transform: translate(0%, -50%);
   } */
 
-  visibility: ${({hasItemsOnRight}) => (hasItemsOnRight ? `all` : `hidden`)};
+  visibility: ${({ hasItemsOnRight }) => (hasItemsOnRight ? `all` : `hidden`)};
 `
 
- const CarouserContainerInner = styled(Flex)`
+const CarouserContainerInner = styled(Flex)`
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   -ms-overflow-style: none;
@@ -194,6 +197,8 @@ const CarouserContainer = styled(Relative)`
 
   // offset for children spacing
   margin-left: -1rem;
+
+  margin-bottom: 100px;
 
   &::-webkit-scrollbar {
     display: none;
@@ -204,7 +209,7 @@ const CarouserContainer = styled(Relative)`
   }
 `
 
-const ArrowLeft = ({size = 30, color = '#000000'}) => (
+const ArrowLeft = ({ size = 30, color = "#000000" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -220,8 +225,7 @@ const ArrowLeft = ({size = 30, color = '#000000'}) => (
   </svg>
 )
 
-
-const ArrowRight = ({size = 30, color = '#000000'}) => (
+const ArrowRight = ({ size = 30, color = "#000000" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -237,8 +241,7 @@ const ArrowRight = ({size = 30, color = '#000000'}) => (
   </svg>
 )
 
-
-function Carousel({children}) {
+function Carousel({ children }) {
   const ref = useRef()
 
   const {
@@ -255,29 +258,37 @@ function Carousel({children}) {
           <CarouselItem key={index}>{child}</CarouselItem>
         ))}
       </CarouserContainerInner>
-      <LeftCarouselButton hasItemsOnLeft={hasItemsOnLeft} onClick={scrollLeft} aria-label='Previous slide'>
-        <ArrowLeft />
-      </LeftCarouselButton>
-      <RightCarouselButton
-        hasItemsOnRight={hasItemsOnRight}
-        onClick={scrollRight}
-        aria-label='Next slide'
-      >
-        <ArrowRight />
-      </RightCarouselButton>
+
+      <ButtonContainer>
+        <LeftCarouselButton
+          hasItemsOnLeft={hasItemsOnLeft}
+          onClick={scrollLeft}
+          aria-label="Previous slide"
+        >
+          <ArrowLeft />
+        </LeftCarouselButton>
+
+        <RightCarouselButton
+          hasItemsOnRight={hasItemsOnRight}
+          onClick={scrollRight}
+          aria-label="Next slide"
+        >
+          <ArrowRight />
+        </RightCarouselButton>
+      </ButtonContainer>
     </CarouserContainer>
   )
 }
 
 const colors = [
-  '#f1c40f',
-  '#f39c12',
-  '#e74c3c',
-  '#16a085',
-  '#2980b9',
-  '#8e44ad',
-  '#2c3e50',
-  '#95a5a6',
+  "#f1c40f",
+  "#f39c12",
+  "#e74c3c",
+  "#16a085",
+  "#2980b9",
+  "#8e44ad",
+  "#2c3e50",
+  "#95a5a6",
 ]
 
 // const numbersArray = Array.from(Array(10).keys()).map((number) => (
@@ -289,17 +300,17 @@ const colors = [
 const colorsArray = colors.map((color) => (
   <Item
     size={20}
-    style={{background: color, borderRadius: '20px', opacity: 0.9}}
+    style={{ background: color, borderRadius: "20px", opacity: 0.9 }}
     key={color}
   >
     {color}
   </Item>
 ))
 
-function WorkCarousel() {
+function WorkCarousel(data) {
   return (
     <Container>
-      <H1>Easy Carousel</H1>
+      <H1>Recent Works</H1>
       <HorizontalCenter>
         <Carousel>{colorsArray}</Carousel>
       </HorizontalCenter>
