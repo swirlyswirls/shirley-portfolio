@@ -1,0 +1,27 @@
+.BrainhubCarousel {
+  padding-bottom: 200px;
+  position: relative;
+}
+
+.BrainhubCarousel__arrows {
+  /* position: absolute; */
+  /* bottom: 0; */
+}
+
+/* .BrainhubCarousel__custom-arrowLeft {
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 100px;
+}
+
+.BrainhubCarousel__custom-arrowRight {
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  left: 100px;
+  bottom: 0;
+  right: 0;
+} */

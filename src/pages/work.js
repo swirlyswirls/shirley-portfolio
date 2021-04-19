@@ -4,7 +4,7 @@ import get from "lodash/get"
 import Layout from "../components/layout"
 import styled from "styled-components"
 import WorkMobile from "../components/WorkMobile"
-import WorkDesktop from "../components/WorkDesktop"
+// import WorkDesktop from "../components/WorkDesktop"
 
 const Desktop = styled.div`
   display: block;
@@ -24,31 +24,17 @@ const Mobile = styled.div`
 function Work({ data }) {
   const siteTitle = get(this, "props.data.site.siteMetadata.title")
 
-  // useEffect(() => {
-  //   const allImages = data.allContentfulWorkProjectPreview.edges.map(
-  //     (project) => {
-  //       return {
-  //         id: project.node.id,
-  //         image: project.node.projectImageDesktop.fluid,
-  //       }
-  //     }
-  //   )
-
-  //   setProjectImagesDesktop(allImages)
-  // }, [data.allContentfulWorkProjectPreview.edges])
-
-
   return (
     <>
       <Layout>
         <Helmet title={siteTitle} />
 
         <Desktop>
-          <WorkDesktop {...data} />
+          {/* <WorkDesktop {...data} /> */}
         </Desktop>
 
         <Mobile>
-          <WorkMobile />
+          <WorkMobile {...data} />
         </Mobile>
       </Layout>
     </>
